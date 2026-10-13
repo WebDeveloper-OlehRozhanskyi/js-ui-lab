@@ -21,17 +21,83 @@
   <title>JS UI Lab</title>
  </head>
  <body id="top">
-  <div class="wrapper">
-   <header class="header">
-    <div class="header__container"></div>
-   </header>
-   <main class="main"></main>
-   <footer class="footer">
-    <div class="footer__container">
-     <p class="footer__text">© 2026 Oleh Rozhanskyi</p>
+  <header class="header">
+   <div class="header__container">
+    <a class="header__logo" href="#top">JS UI Lab</a>
+    <a
+     class="header__link"
+     href="https://github.com/WebDeveloper-OlehRozhanskyi/js-ui-lab"
+     target="_blank"
+     rel="noopener">
+     GitHub
+     <span class="visually-hidden">(opens in a new tab)</span>
+    </a>
+   </div>
+  </header>
+  <main class="main">
+   <section class="intro">
+    <div class="intro__container">
+     <h1 class="intro__title">JS UI Lab</h1>
+     <p class="intro__description">
+      Interactive UI components built with vanilla JavaScript — no frameworks or
+      libraries. Each one is accessible, keyboard-friendly and ready to reuse.
+     </p>
     </div>
-   </footer>
-  </div>
+   </section>
+   <section class="showcase" aria-labelledby="showcase-title">
+    <div class="showcase__container">
+     <h2 class="showcase__title section-title" id="showcase-title">
+      Components
+     </h2>
+     <div class="tabs" data-tabs>
+      <div class="tabs__list" role="tablist">
+       <button
+        class="tabs__list-button"
+        role="tab"
+        id="tab-accordion"
+        type="button"
+        aria-controls="panel-accordion"
+        aria-selected="true"
+        data-tabs-button>
+        Accordion
+       </button>
+       <button
+        class="tabs__list-button"
+        role="tab"
+        id="tab-modal"
+        type="button"
+        aria-controls="panel-modal"
+        aria-selected="false"
+        data-tabs-button>
+        Modal
+       </button>
+      </div>
+      <div
+       class="tabs__panel"
+       role="tabpanel"
+       id="panel-accordion"
+       aria-labelledby="tab-accordion"
+       data-tabs-panel>
+       <h3>accordion</h3>
+      </div>
+      <div
+       class="tabs__panel"
+       role="tabpanel"
+       id="panel-modal"
+       aria-labelledby="tab-modal"
+       data-tabs-panel
+       hidden>
+       <h3>modal</h3>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="footer">
+   <div class="footer__container">
+    <p class="footer__text">© 2026 Oleh Rozhanskyi</p>
+   </div>
+  </footer>
   <script type="module" src="./src/main.js"></script>
  </body>
 </html>
