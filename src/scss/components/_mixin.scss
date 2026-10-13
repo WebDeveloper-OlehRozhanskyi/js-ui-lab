@@ -1,7 +1,6 @@
 @use 'sass:math';
 @use 'variables' as *;
 @use 'functions' as *;
-@use 'root' as *;
 
 @mixin small-mobile {
  @media (width <= rem($small-mobile)) {
@@ -115,13 +114,6 @@
  }
 }
 
-// Ціль для пальця: не нижча за 44px (Apple HIG, WCAG 2.5.5), текст по центру висоти
-@mixin tap-target {
- display: inline-flex;
- align-items: center;
- min-height: rem(44);
-}
-
 @mixin panel {
  background-color: var(--glass-bg);
  border: 1px solid var(--glass-border);
@@ -130,38 +122,21 @@
  backdrop-filter: blur(var(--glass-blur));
 }
 
-@mixin fluid-text(
- $min: 16,
- $max: 48,
- $min-viewport: $small-mobile,
- $max-viewport: $desktop
-) {
- $max-viewport-width: $max-viewport;
- $min-viewport-width: $min-viewport;
- $max-size: math.div($max, 16);
- $min-size: math.div($min, 16);
- $max-width: math.div($max-viewport-width, 16);
- $min-width: math.div($min-viewport-width, 16);
- $slope: math.div(($max-size - $min-size), ($max-width - $min-width));
- $y-axis-intersection: -$min-width * $slope + $min-size;
-
- font-size: clamp(
-  #{$min-size * 1rem},
-  #{$y-axis-intersection * 1rem} + #{$slope * 100vw},
-  #{$max-size * 1rem}
- );
-}
-
 @mixin bg-image-set($base, $ext: 'jpg') {
+ $mime: 'jpeg';
+
+ @if $ext == 'png' {
+  $mime: 'png';
+ }
+
  background-image: url('#{$base}.#{$ext}');
  background-image: image-set(
   url('#{$base}.avif') type('image/avif') 1x,
   url('#{$base}@2x.avif') type('image/avif') 2x,
   url('#{$base}.webp') type('image/webp') 1x,
   url('#{$base}@2x.webp') type('image/webp') 2x,
-  url('#{$base}.#{$ext}') type('image/#{if($ext == "png", "png", "jpeg")}') 1x,
-  url('#{$base}@2x.#{$ext}') type('image/#{if($ext == "png", "png", "jpeg")}')
-   2x
+  url('#{$base}.#{$ext}') type('image/#{$mime}') 1x,
+  url('#{$base}@2x.#{$ext}') type('image/#{$mime}') 2x
  );
  background-repeat: no-repeat;
  background-position: center;

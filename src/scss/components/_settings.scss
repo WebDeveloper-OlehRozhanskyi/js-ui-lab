@@ -40,32 +40,9 @@ body {
  width: 1px !important;
  height: 1px !important;
  padding: 0 !important;
- margin: 1px !important;
+ margin: -1px !important;
  overflow: hidden !important;
  white-space: nowrap !important;
  border: 0 !important;
-
- // prettier-ignore
- clip: rect(0 0 0 0)!important; /* stylelint-disable-line property-no-deprecated */
  clip-path: inset(50%) !important;
-}
-
-/* Загальний стиль для всіх веб-кіт браузерів */
-::-webkit-scrollbar {
- width: rem(7);
- height: rem(4); /* Ширина смужки прокрутки */
-
- @include mobile {
-  width: rem(4);
- }
-}
-
-::-webkit-scrollbar-track {
- background: var(--color-300); /* Колір треку */
-}
-
-::-webkit-scrollbar-thumb {
- background-color: var(--color-600); /* Колір смужки прокрутки */
- border: none; /* Простір між смужкою і треком  */
- border-radius: rem(10); /* Округлені краї смужки прокрутки */
 }

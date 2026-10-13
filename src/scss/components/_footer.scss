@@ -16,71 +16,9 @@
   backdrop-filter: blur(var(--glass-blur));
  }
 
- // .footer__nav
- &__nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--gap-md);
-  align-items: center;
-  width: 100%;
- }
-
- // .footer__nav-link
- &__nav-link {
-  @include link;
-  @include hover-line;
-  @include tap-target;
-
-  position: relative;
-  flex-wrap: wrap;
-  column-gap: var(--gap-xs);
-  justify-content: center;
-  font-weight: 600;
-  text-align: center;
-  transition: color var(--transition);
-
-  @include hover {
-   color: var(--color-accent);
-  }
-
-  @include xsm {
-   flex-direction: column;
-  }
-
-  // .footer__nav-link--all
-  &--all {
-   font-weight: 400;
-   color: var(--color-600);
-  }
-
-  &--prev {
-   justify-self: start;
-
-   &::after {
-    order: -1;
-    content: '←';
-    content: '←' / '';
-
-    @include xsm {
-     order: 1;
-    }
-   }
-  }
-
-  &--next {
-   justify-self: end;
-
-   &::after {
-    content: '→';
-    content: '→' / '';
-   }
-  }
- }
-
  // .footer__text
  &__text {
-  @include margin-block;
-
+  margin-block: 0;
   font-size: var(--text-sm);
   color: var(--color-600);
  }

@@ -1,33 +1,35 @@
 @use 'foundation' as *;
 
-.main {
+.wrapper {
  display: flex;
  flex-direction: column;
+}
+
+.main {
+ display: flex;
+ flex-grow: 0;
+ flex-direction: column;
  gap: var(--gap-2xl);
- padding: var(--gap-2xl) var(--padding-inline);
+
+ //  padding: var(--gap-2xl) var(--padding-inline);
 }
 
 .container {
  @include container;
-
- padding-block: var(--gap-xl);
 }
 
 .section-title {
- @include margin-block;
-
+ margin-block: 0;
  font-size: var(--text-2xl);
  font-weight: 700;
  line-height: 1.2;
 }
 
 .button {
- @include link;
-
  display: inline-flex;
  align-items: center;
  justify-content: center;
- min-height: rem(44);
+ min-height: var(--tap-size);
  padding: var(--gap-sm) var(--gap-lg);
  font-weight: 600;
  white-space: nowrap;

@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   min-height: var(--header-height);
-  padding-block: var(--gap-md);
+  padding-block: var(--gap-lg);
   border-bottom: 1px solid var(--glass-border);
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 
@@ -32,9 +32,6 @@
 
  // .header__logo
  &__logo {
-  @include link;
-  @include tap-target;
-
   font-size: var(--text-lg);
   font-weight: 700;
   white-space: nowrap;
@@ -89,7 +86,6 @@
 
  // .menu__list-link
  &__list-link {
-  @include link;
   @include hover-line;
 
   position: relative;
@@ -107,8 +103,6 @@
 }
 
 .burger-btn {
- @include button;
-
  display: none;
  flex-direction: column;
  gap: var(--gap-xs);
