@@ -1,0 +1,189 @@
+// Під час збірки замінює <img src="*.jpg|png"> на <picture> з avif/webp.
+// Розмір показу береться з атрибута width (CSS px), тож нічого не треба
+// перераховувати, коли міняються картинки чи верстка:
+// - файли: ширина показу і подвоєна (для retina), але не більші за джерело;
+// - lazy-картинки: sizes="auto" — браузер сам бере ширину слота з верстки;
+// - eager-картинки (перший екран): 1x/2x, бо auto дозволений лише з lazy.
+import { createHash } from 'crypto'
+import { promises as fs } from 'fs'
+import path from 'path'
+import sharp from 'sharp'
+
+const defaults = {
+ formats: ['avif', 'webp'],
+ // та сама цифра дає різну якість: AVIF 50 на око ≈ WebP/JPEG 75, а файл менший
+ quality: { avif: 50, webp: 75, jpeg: 75, png: 75 },
+ outputDir: 'assets/images',
+}
+
+export function imgToPicture(userOptions = {}) {
+ const options = {
+  ...defaults,
+  ...userOptions,
+  quality: { ...defaults.quality, ...userOptions.quality },
+ }
+ // джерело → Promise з варіантами. Promise кладемо в кеш одразу: Vite обробляє
+ // сторінки паралельно, і спільну картинку інакше генерували б кілька разів
+ const cache = new Map()
+ let base = '/'
+ let outDir = 'dist'
+
+ const createVariants = async (filePath, displayWidth) => {
+  const source = await fs.readFile(filePath)
+  // autoOrient — розміри після EXIF-повороту: фото з телефона часто збережене
+  // «лежачи» з позначкою, що його треба повернути
+  const { autoOrient } = await sharp(source).metadata()
+  const sourceWidth = autoOrient.width
+  const fileName = path.basename(filePath)
+
+  if (!displayWidth) {
+   console.warn(
+    `⚠ ${fileName}: немає атрибута width — вважаю файл удвічі більшим за показ`
+   )
+  }
+  // floor: для непарної ширини файлу (463px) подвоєний показ не перевищить файл
+  const display = displayWidth || Math.floor(sourceWidth / 2)
+  const widths = [
+   ...new Set([display, display * 2].map(w => Math.min(w, sourceWidth))),
+  ]
+
+  if (sourceWidth < display * 2) {
+   console.warn(
+    `⚠ ${fileName}: файл ${sourceWidth}px, показ ${display}px — для retina потрібно ${display * 2}px`
+   )
+  }
+
+  const ext = path.extname(filePath).slice(1).toLowerCase()
+  const hash = createHash('sha256').update(source).digest('hex').slice(0, 8)
+  const name = `${path.basename(filePath, path.extname(filePath))}-${hash}`
+
+  const variants = []
+  for (const format of [...options.formats, ext]) {
+   const quality = options.quality[format === 'jpg' ? 'jpeg' : format]
+   for (const width of widths) {
+    const buffer = await sharp(source)
+     .autoOrient()
+     .resize({ width, withoutEnlargement: true })
+     .toFormat(format, { quality })
+     .toBuffer()
+    variants.push({
+     format,
+     width,
+     buffer,
+     file: `${options.outputDir}/${name}-${width}.${format}`,
+    })
+   }
+  }
+
+  return { display, ext, variants }
+ }
+
+ const makeVariants = (filePath, displayWidth) => {
+  const key = `${filePath}|${displayWidth}`
+  if (!cache.has(key)) cache.set(key, createVariants(filePath, displayWidth))
+  return cache.get(key)
+ }
+
+ const buildPicture = (tag, { display, ext, variants }) => {
+  const url = file => `${base}${file}`
+  const isEager = /\sloading=["']eager["']/.test(tag)
+  const ownSizes = tag.match(/\ssizes=["']([^"']*)["']/)?.[1]
+  const sizes = isEager
+   ? ''
+   : ownSizes || `auto, (min-width: ${display}px) ${display}px, 100vw`
+
+  // lazy: w-дескриптори + sizes; eager: густина (1x/2x) без sizes
+  const srcset = format =>
+   variants
+    .filter(v => v.format === format)
+    .map(
+     v =>
+      `${url(v.file)} ${isEager ? `${+(v.width / display).toFixed(2)}x` : `${v.width}w`}`
+    )
+    .join(', ')
+  const sizesAttr = sizes ? ` sizes="${sizes}"` : ''
+
+  const sources = options.formats
+   .map(f => `<source type="image/${f}" srcset="${srcset(f)}"${sizesAttr}>`)
+   .join('')
+
+  // решту атрибутів <img> (alt, class, width, height, loading...) лишаємо як є
+  const rest = tag
+   .replace(/^<img/, '')
+   .replace(/\/?>$/, '')
+   .replace(/\s(src|srcset|sizes)=(["'])[\s\S]*?\2/g, '')
+   .replace(/\s+/g, ' ')
+   .trim()
+  const fallback = variants.find(v => v.format === ext)
+  const imgAttributes = [
+   `src="${url(fallback.file)}"`,
+   `srcset="${srcset(ext)}"`,
+   sizes && `sizes="${sizes}"`,
+   !/\sloading=/.test(tag) && 'loading="lazy"',
+   !/\sdecoding=/.test(tag) && 'decoding="async"',
+   rest,
+  ]
+   .filter(Boolean)
+   .join(' ')
+
+  return `<picture>${sources}<img ${imgAttributes}></picture>`
+ }
+
+ return {
+  name: 'html-img-to-picture',
+  apply: 'build',
+
+  configResolved(config) {
+   base = config.base
+   outDir = path.resolve(config.root, config.build.outDir)
+  },
+
+  async transform(html, id) {
+   if (!id.endsWith('.html')) return null
+
+   // <img\b, а не <img\s: інакше тег, де src іде першим (<img src="...">), пропускався
+   const tags = html.match(
+    /<img\b[^>]*\ssrc=["'](?!https?:|data:|\/)[^"']+\.(?:jpe?g|png)["'][^>]*>/gi
+   )
+   if (!tags) return null
+
+   for (const tag of tags) {
+    const src = tag.match(/\ssrc=["']([^"']+)["']/)[1]
+    const displayWidth = Number(tag.match(/\swidth=["'](\d+)["']/)?.[1]) || 0
+    const data = await makeVariants(
+     path.resolve(path.dirname(id), src),
+     displayWidth
+    )
+    // функція, а не рядок: у рядку $& чи $' (наприклад, в alt) replace
+    // сприйняв би як шаблон і вставив би шматки сторінки
+    const picture = buildPicture(tag, data)
+    html = html.replace(tag, () => picture)
+   }
+
+   return { code: html, map: null }
+  },
+
+  async writeBundle() {
+   const results = await Promise.all(cache.values())
+   // та сама картинка з різним width (картка і hero) дає спільні файли — пишемо раз
+   const files = new Map(
+    results.flatMap(r => r.variants).map(v => [v.file, v.buffer])
+   )
+   for (const [file, buffer] of files) {
+    const dest = path.join(outDir, file)
+    await fs.mkdir(path.dirname(dest), { recursive: true })
+    await fs.writeFile(dest, buffer)
+   }
+   const images = new Set([...cache.keys()].map(key => key.split('|')[0])).size
+   const kib = [...files.values()].reduce((sum, b) => sum + b.length, 0) / 1024
+   console.log(
+    `html-img-to-picture: ${images} картинок → ${files.size} файлів, ${kib.toFixed(0)} KiB`
+   )
+  },
+
+  // у режимі --watch оновлена картинка інакше бралася б зі старого кешу
+  closeBundle() {
+   cache.clear()
+  },
+ }
+}
