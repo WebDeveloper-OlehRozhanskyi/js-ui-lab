@@ -25,6 +25,10 @@ export default [
   rules: {
    eqeqeq: ['error', 'always'],
    camelcase: ['error', { properties: 'never', ignoreDestructuring: true }],
+   // Спершу оголошуєш — потім використовуєш (функції теж)
+   'no-use-before-define': 'error',
+   // Вираз, результат якого нікуди не йде (часто — забутий return)
+   'no-unused-expressions': 'error',
   },
  },
 
