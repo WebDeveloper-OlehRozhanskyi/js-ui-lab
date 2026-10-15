@@ -1,7 +1,14 @@
+function getOwnElements(tabRoot, selector) {
+ const allElements = [...tabRoot.querySelectorAll(selector)]
+ return allElements.filter(
+  element => element.closest('[data-tabs]') === tabRoot
+ )
+}
+
 function selectTab(button) {
  const tabRoot = button.closest('[data-tabs]')
- const tabButtons = tabRoot.querySelectorAll('[data-tabs-button]')
- const tabPanels = tabRoot.querySelectorAll('[data-tabs-panel]')
+ const tabButtons = getOwnElements(tabRoot, '[data-tabs-button]')
+ const tabPanels = getOwnElements(tabRoot, '[data-tabs-panel]')
 
  tabButtons.forEach(tabButton => {
   tabButton.setAttribute('aria-selected', 'false')
@@ -23,7 +30,7 @@ function selectTab(button) {
 
 function getButtonForKey(button, key) {
  const tabRoot = button.closest('[data-tabs]')
- const tabButtons = [...tabRoot.querySelectorAll('[data-tabs-button]')]
+ const tabButtons = getOwnElements(tabRoot, '[data-tabs-button]')
  const currentIndex = tabButtons.indexOf(button)
  const lastIndex = tabButtons.length - 1
 
