@@ -26,6 +26,10 @@ function selectTab(button) {
  const selectedPanel = document.getElementById(panelId)
 
  selectedPanel.hidden = false
+
+ if (tabRoot.hasAttribute('data-tabs-hash')) {
+  history.replaceState(null, '', '#' + button.id)
+ }
 }
 
 function getButtonForKey(button, key) {
@@ -56,6 +60,19 @@ function getButtonForKey(button, key) {
  }
 }
 
+function selectTabFromHash() {
+ const tabId = location.hash.slice(1)
+ if (!tabId) return
+
+ const button = document.getElementById(tabId)
+ if (!button || !button.hasAttribute('data-tabs-button')) return
+
+ const tabRoot = button.closest('[data-tabs]')
+ if (!tabRoot.hasAttribute('data-tabs-hash')) return
+
+ selectTab(button)
+}
+
 export function initTabs() {
  document.addEventListener('click', event => {
   const button = event.target.closest('[data-tabs-button]')
@@ -76,4 +93,8 @@ export function initTabs() {
 
   buttonToSelect.focus()
  })
+
+ selectTabFromHash()
+
+ window.addEventListener('hashchange', selectTabFromHash)
 }
