@@ -58,7 +58,8 @@
         type="button"
         aria-controls="panel-accordion"
         aria-selected="true"
-        data-tabs-button>
+        data-tabs-button
+        tabindex="0">
         Accordion
        </button>
        <button
@@ -68,7 +69,8 @@
         type="button"
         aria-controls="panel-modal"
         aria-selected="false"
-        data-tabs-button>
+        data-tabs-button
+        tabindex="-1">
         Modal
        </button>
       </div>
@@ -77,7 +79,8 @@
        role="tabpanel"
        id="panel-accordion"
        aria-labelledby="tab-accordion"
-       data-tabs-panel>
+       data-tabs-panel
+       tabindex="0">
        <h3>accordion</h3>
       </div>
       <div
@@ -86,6 +89,7 @@
        id="panel-modal"
        aria-labelledby="tab-modal"
        data-tabs-panel
+       tabindex="0"
        hidden>
        <h3>modal</h3>
       </div>
