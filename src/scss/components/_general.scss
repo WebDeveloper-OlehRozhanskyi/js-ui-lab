@@ -7,10 +7,6 @@
  gap: var(--gap-2xl);
 }
 
-.container {
- @include container;
-}
-
 .section-title {
  margin-block: 0;
  font-size: var(--text-2xl);

@@ -1,0 +1,8 @@
+@use 'foundation' as *;
+
+.intro {
+ // .intro__container
+ &__container {
+  @include container;
+ }
+}
