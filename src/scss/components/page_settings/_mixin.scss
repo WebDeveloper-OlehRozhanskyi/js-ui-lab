@@ -1,67 +1,7 @@
-@use 'sass:math';
 @use 'variables' as *;
 @use 'functions' as *;
 
-@mixin small-mobile {
- @media (width <= rem($small-mobile)) {
-  @content;
- }
-}
-
-@mixin xxsm {
- @media (width <= rem($xxsm)) {
-  @content;
- }
-}
-
-@mixin xsm {
- @media (width <= rem($xsm)) {
-  @content;
- }
-}
-
-@mixin sm {
- @media (width <= rem($sm)) {
-  @content;
- }
-}
-
-@mixin m {
- @media (width <= rem($m)) {
-  @content;
- }
-}
-
-@mixin mobile {
- @media (width <= rem($mobile)) {
-  @content;
- }
-}
-
-@mixin bm {
- @media (width <= rem($bm)) {
-  @content;
- }
-}
-
-@mixin st {
- @media (width <= rem($st)) {
-  @content;
- }
-}
-
-@mixin t {
- @media (width <= rem($t)) {
-  @content;
- }
-}
-
-@mixin bt {
- @media (width <= rem($bt)) {
-  @content;
- }
-}
-
+// Брейкпоінти: від більшого до меншого
 @mixin l {
  @media (width <= rem($l)) {
   @content;
@@ -74,6 +14,49 @@
  }
 }
 
+@mixin bt {
+ @media (width <= rem($bt)) {
+  @content;
+ }
+}
+
+@mixin t {
+ @media (width <= rem($t)) {
+  @content;
+ }
+}
+
+@mixin bm {
+ @media (width <= rem($bm)) {
+  @content;
+ }
+}
+
+@mixin m {
+ @media (width <= rem($m)) {
+  @content;
+ }
+}
+
+@mixin sm {
+ @media (width <= rem($sm)) {
+  @content;
+ }
+}
+
+@mixin xsm {
+ @media (width <= rem($xsm)) {
+  @content;
+ }
+}
+
+@mixin small-mobile {
+ @media (width <= rem($small-mobile)) {
+  @content;
+ }
+}
+
+// Розкладка
 @mixin container {
  max-width: calc(#{rem($container)} + var(--padding-inline) * 2);
  padding-inline: var(--padding-inline);
@@ -81,6 +64,7 @@
  @content;
 }
 
+// Взаємодія
 @mixin hover {
  @media (hover: hover) and (pointer: fine) {
   &:hover {
@@ -114,6 +98,7 @@
  }
 }
 
+// Оформлення
 @mixin panel {
  background-color: var(--glass-bg);
  border: 1px solid var(--glass-border);

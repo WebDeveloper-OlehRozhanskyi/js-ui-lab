@@ -1,47 +1,4 @@
-@use 'foundation' as *;
-
-.header {
- position: sticky;
- top: 0;
- z-index: 10;
-
- // .header__container
- &__container {
-  @include container;
-
-  position: relative;
-  display: flex;
-  gap: var(--gap-lg);
-  align-items: center;
-  justify-content: space-between;
-  min-height: var(--header-height);
-  padding-block: var(--gap-lg);
-  border-bottom: 1px solid var(--glass-border);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-
-  &::before {
-   position: absolute;
-   inset: 0;
-   z-index: -1;
-   content: '';
-   background-color: var(--glass-bg);
-   border-radius: inherit;
-   backdrop-filter: blur(var(--glass-blur));
-  }
- }
-
- // .header__logo
- &__logo {
-  font-size: var(--text-lg);
-  font-weight: 700;
-  white-space: nowrap;
-  transition: color var(--transition);
-
-  @include hover {
-   color: var(--color-accent);
-  }
- }
-}
+@use 'page_settings/foundation' as *;
 
 .menu {
  @include bm {
@@ -69,11 +26,12 @@
 
  // .menu__list
  &__list {
-  @include list;
-
   display: flex;
   gap: var(--gap-lg);
   align-items: center;
+  padding-left: 0;
+  margin-block: 0;
+  list-style: none;
 
   @include bm {
    flex-flow: column nowrap;

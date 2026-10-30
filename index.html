@@ -25,7 +25,7 @@
    <div class="header__container">
     <a class="header__logo" href="#top">JS UI Lab</a>
     <a
-     class="header__link"
+     class="button"
      href="https://github.com/WebDeveloper-OlehRozhanskyi/js-ui-lab"
      target="_blank"
      rel="noopener">
@@ -46,13 +46,11 @@
    </section>
    <section class="showcase" aria-labelledby="showcase-title">
     <div class="showcase__container">
-     <h2 class="showcase__title section-title" id="showcase-title">
-      Components
-     </h2>
+     <h2 class="showcase__title" id="showcase-title">Components</h2>
      <div class="tabs" data-tabs data-tabs-hash>
       <div class="tabs__list" role="tablist">
        <button
-        class="tabs__list-button"
+        class="tabs__list-button button"
         role="tab"
         id="tab-accordion"
         type="button"
@@ -63,7 +61,7 @@
         Accordion
        </button>
        <button
-        class="tabs__list-button"
+        class="tabs__list-button button"
         role="tab"
         id="tab-modal"
         type="button"
@@ -82,6 +80,51 @@
        data-tabs-panel
        tabindex="0">
        <h3>accordion</h3>
+       <div class="tabs" data-tabs>
+        <div class="tabs__list" role="tablist">
+         <button
+          class="tabs__list-button button"
+          role="tab"
+          id="tab-html"
+          type="button"
+          aria-controls="panel-html"
+          aria-selected="true"
+          data-tabs-button
+          tabindex="0">
+          HTML
+         </button>
+         <button
+          class="tabs__list-button button"
+          role="tab"
+          id="tab-css"
+          type="button"
+          aria-controls="panel-css"
+          aria-selected="false"
+          data-tabs-button
+          tabindex="-1">
+          CSS
+         </button>
+        </div>
+        <div
+         class="tabs__panel"
+         role="tabpanel"
+         id="panel-html"
+         aria-labelledby="tab-html"
+         data-tabs-panel
+         tabindex="0">
+         <p>html</p>
+        </div>
+        <div
+         class="tabs__panel"
+         role="tabpanel"
+         id="panel-css"
+         aria-labelledby="tab-css"
+         data-tabs-panel
+         tabindex="0"
+         hidden>
+         <p>css</p>
+        </div>
+       </div>
       </div>
       <div
        class="tabs__panel"

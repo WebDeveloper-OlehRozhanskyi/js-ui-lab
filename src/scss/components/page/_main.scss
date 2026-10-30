@@ -1,0 +1,31 @@
+@use 'page_settings/foundation' as *;
+
+.main {
+ display: flex;
+ flex-grow: 1;
+ flex-direction: column;
+ gap: var(--gap-2xl);
+ padding-block: var(--gap-2xl);
+}
+
+.intro {
+ // .intro__container
+ &__container {
+  @include container;
+ }
+}
+
+.showcase {
+ // .showcase__container
+ &__container {
+  @include container;
+
+  display: grid;
+  gap: var(--gap-lg);
+ }
+
+ // .showcase__title
+ &__title {
+  font-size: var(--text-2xl);
+ }
+}

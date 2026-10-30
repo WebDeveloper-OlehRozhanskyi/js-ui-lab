@@ -1,0 +1,33 @@
+@use 'page_settings/foundation' as *;
+
+.tabs {
+ display: grid;
+ gap: var(--gap-md);
+
+ // .tabs__list
+ &__list {
+  display: flex;
+  gap: var(--gap-sm);
+ }
+
+ // .tabs__list-button
+ &__list-button {
+  &[aria-selected='true'] {
+   color: var(--color-white);
+   background-color: var(--color-accent);
+  }
+ }
+
+ // .tabs__panel
+ &__panel {
+  @include panel;
+
+  display: grid;
+  gap: var(--gap-md);
+  padding: var(--gap-lg);
+
+  &[hidden] {
+   display: none;
+  }
+ }
+}
