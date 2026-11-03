@@ -1,8 +1,6 @@
 @use 'page_settings/foundation' as *;
 
-h1,
-h2,
-h3 {
+.title {
  margin-block: 0;
  font-weight: 700;
  line-height: 1.2;
@@ -25,7 +23,7 @@ h3 {
  align-items: center;
  justify-content: center;
  min-height: var(--tap-size);
- padding: var(--gap-sm) var(--gap-lg);
+ padding: var(--gap-xs) var(--gap-lg);
  font: inherit;
  font-weight: 600;
  color: inherit;

@@ -37,7 +37,7 @@
   <main class="main">
    <section class="intro">
     <div class="intro__container">
-     <h1 class="intro__title">JS UI Lab</h1>
+     <h1 class="intro__title title">JS UI Lab</h1>
      <p class="intro__description">
       Interactive UI components built with vanilla JavaScript — no frameworks or
       libraries. Each one is accessible, keyboard-friendly and ready to reuse.
@@ -46,9 +46,9 @@
    </section>
    <section class="showcase" aria-labelledby="showcase-title">
     <div class="showcase__container">
-     <h2 class="showcase__title" id="showcase-title">Components</h2>
+     <h2 class="showcase__title title" id="showcase-title">Components</h2>
      <div class="tabs" data-tabs data-tabs-hash>
-      <div class="tabs__list" role="tablist">
+      <div class="tabs__list" role="tablist" aria-labelledby="showcase-title">
        <button
         class="tabs__list-button button"
         role="tab"
@@ -79,9 +79,9 @@
        aria-labelledby="tab-accordion"
        data-tabs-panel
        tabindex="0">
-       <h3>accordion</h3>
+       <h3 class="tabs__title title">Accordion</h3>
        <div class="tabs" data-tabs>
-        <div class="tabs__list" role="tablist">
+        <div class="tabs__list" role="tablist" aria-label="Accordion code">
          <button
           class="tabs__list-button button"
           role="tab"
@@ -112,7 +112,7 @@
          aria-labelledby="tab-html"
          data-tabs-panel
          tabindex="0">
-         <p>html</p>
+         <p class="tabs__text">html</p>
         </div>
         <div
          class="tabs__panel"
@@ -122,7 +122,7 @@
          data-tabs-panel
          tabindex="0"
          hidden>
-         <p>css</p>
+         <p class="tabs__text">css</p>
         </div>
        </div>
       </div>
@@ -134,7 +134,7 @@
        data-tabs-panel
        tabindex="0"
        hidden>
-       <h3>modal</h3>
+       <h3 class="tabs__title title">modal</h3>
       </div>
      </div>
     </div>
