@@ -1,40 +1,51 @@
-export function menuBurger() {
- const burgerButton = document.querySelector('.burger-btn')
- if (!burgerButton) return
- const menuLinks = document.querySelectorAll('.menu__list-link')
- const main = document.querySelector('.main')
- const footer = document.querySelector('.footer')
- // Дублює змінну bm з _variables.scss
- const mobileQuery = window.matchMedia('(max-width: 47.99875rem)')
+function setBurgerOpen(burgerButton, isOpen) {
+ const inertElements = document.querySelectorAll('[data-burger-inert]')
 
- function isMenuOpen() {
-  return burgerButton.getAttribute('aria-expanded') === 'true'
- }
+ burgerButton.setAttribute('aria-expanded', isOpen)
 
- function setMenuOpen(isOpen) {
-  burgerButton.setAttribute('aria-expanded', isOpen)
-  main.inert = isOpen
-  footer.inert = isOpen
- }
-
- function closeMenu() {
-  setMenuOpen(false)
- }
-
- burgerButton.addEventListener('click', () => {
-  setMenuOpen(!isMenuOpen())
+ inertElements.forEach(element => {
+  element.inert = isOpen
  })
+}
 
- menuLinks.forEach(link => {
-  link.addEventListener('click', closeMenu)
+function getOpenBurgerButton() {
+ const openBurgerButton = document.querySelector(
+  '[data-burger-button][aria-expanded="true"]'
+ )
+
+ return openBurgerButton
+}
+
+export function initBurger() {
+ document.addEventListener('click', event => {
+  const burgerButton = event.target.closest('[data-burger-button]')
+  if (burgerButton) {
+   const isOpen = burgerButton.getAttribute('aria-expanded') === 'true'
+   setBurgerOpen(burgerButton, !isOpen)
+   return
+  }
+
+  const burgerLink = event.target.closest('[data-burger-link]')
+  if (!burgerLink) return
+  const openBurgerButton = getOpenBurgerButton()
+  if (!openBurgerButton) return
+  setBurgerOpen(openBurgerButton, false)
  })
 
  document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && isMenuOpen()) {
-   closeMenu()
-   burgerButton.focus()
-  }
+  if (event.key !== 'Escape') return
+  const openBurgerButton = getOpenBurgerButton()
+  if (!openBurgerButton) return
+  setBurgerOpen(openBurgerButton, false)
+  openBurgerButton.focus()
  })
 
- mobileQuery.addEventListener('change', closeMenu)
+ // Дублює змінну bm з _variables.scss
+ const mobileQuery = window.matchMedia('(max-width: 47.99875rem)')
+
+ mobileQuery.addEventListener('change', () => {
+  const openBurgerButton = getOpenBurgerButton()
+  if (!openBurgerButton) return
+  setBurgerOpen(openBurgerButton, false)
+ })
 }

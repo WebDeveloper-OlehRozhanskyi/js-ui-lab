@@ -38,7 +38,6 @@
    row-gap: var(--gap-xl);
    align-items: center;
    justify-content: flex-start;
-   margin-bottom: var(--gap-xl);
   }
  }
 
@@ -48,6 +47,8 @@
 
   position: relative;
   font-size: var(--text-base);
+  color: inherit;
+  text-decoration: none;
   transition: color var(--transition);
 
   @include hover {
@@ -65,9 +66,10 @@
  flex-direction: column;
  gap: var(--gap-xs);
  justify-content: center;
- width: rem(44);
- height: rem(44);
+ width: var(--tap-size);
+ height: var(--tap-size);
  padding: var(--gap-sm);
+ cursor: pointer;
  background-color: transparent;
  border: none;
 
