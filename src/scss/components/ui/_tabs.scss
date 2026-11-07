@@ -8,10 +8,14 @@
  &__list {
   display: flex;
   gap: var(--gap-sm);
+  padding: calc(var(--focus-width) + var(--focus-offset));
+  overflow-x: auto;
  }
 
  // .tabs__list-button
  &__list-button {
+  flex-shrink: 0;
+
   &[aria-selected='true'] {
    color: var(--color-white);
    background-color: var(--color-accent);
@@ -29,15 +33,5 @@
   &[hidden] {
    display: none;
   }
- }
-
- // .tabs__title
- &__title {
-  font-size: var(--text-lg);
- }
-
- // .tabs__text
- &__text {
-  margin-block: 0;
  }
 }
