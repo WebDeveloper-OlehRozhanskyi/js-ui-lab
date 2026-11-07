@@ -80,26 +80,34 @@
        data-tabs-panel
        tabindex="0">
        <div class="demo">
-        <h3 class="demo__title title">Accordion</h3>
-        <p class="demo__description">
-         A list of headings that show or hide their content. Useful for FAQs and
-         long pages where not everything needs to be visible at once.
-        </p>
-        <h4 class="demo__subtitle title">Demo</h4>
-        <div class="demo__preview">The demo is coming soon.</div>
-        <h4 class="demo__subtitle title">What it does</h4>
-        <ul class="demo__features">
-         <li class="demo__features-item">Opens and closes sections on click</li>
-         <li class="demo__features-item">
-          Works from the keyboard: Tab, Enter and Space
-         </li>
-         <li class="demo__features-item">
-          Tells screen readers whether a section is open or closed
-         </li>
-         <li class="demo__features-item">
-          Several accordions on one page work independently
-         </li>
-        </ul>
+        <div class="demo__group">
+         <h3 class="demo__title title">Accordion</h3>
+         <p class="demo__description">
+          A list of headings that show or hide their content. Useful for FAQs
+          and long pages where not everything needs to be visible at once.
+         </p>
+        </div>
+        <div class="demo__group">
+         <h4 class="demo__subtitle title">Demo</h4>
+         <div class="demo__preview">The demo is coming soon.</div>
+        </div>
+        <div class="demo__group">
+         <h4 class="demo__subtitle title">What it does</h4>
+         <ul class="demo__features" role="list">
+          <li class="demo__features-item">
+           Opens and closes sections on click
+          </li>
+          <li class="demo__features-item">
+           Works from the keyboard: Tab, Enter and Space
+          </li>
+          <li class="demo__features-item">
+           Tells screen readers whether a section is open or closed
+          </li>
+          <li class="demo__features-item">
+           Several accordions on one page work independently
+          </li>
+         </ul>
+        </div>
        </div>
       </div>
       <div
@@ -119,7 +127,7 @@
         <h4 class="demo__subtitle title">Demo</h4>
         <div class="demo__preview">The demo is coming soon.</div>
         <h4 class="demo__subtitle title">What it does</h4>
-        <ul class="demo__features">
+        <ul class="demo__features" role="list">
          <li class="demo__features-item">
           Opens from a button and returns focus to it when closed
          </li>

@@ -1,0 +1,58 @@
+@use 'page_settings/foundation' as *;
+
+.demo {
+ display: grid;
+ gap: var(--gap-xl);
+
+ // .demo__group
+ &__group {
+  display: grid;
+  gap: var(--gap-sm);
+ }
+
+ // .demo__title
+ &__title {
+  font-size: var(--text-md);
+ }
+
+ // .demo__description
+ &__description {
+  margin-block: 0;
+  color: var(--color-600);
+ }
+
+ // .demo__subtitle
+ &__subtitle {
+  font-size: var(--text-base);
+ }
+
+ // .demo__preview
+ &__preview {
+  padding: var(--gap-lg);
+  background: var(--glass-bg-strong);
+  border-radius: var(--radius-md);
+ }
+
+ // .demo__features
+ &__features {
+  display: grid;
+  gap: var(--gap-xs);
+  padding-left: 0;
+  margin-block: 0;
+  list-style: none;
+  counter-reset: features 0;
+ }
+
+ // .demo__features-item
+ &__features-item {
+  display: flex;
+  gap: var(--gap-sm);
+  counter-increment: features 1;
+
+  &::before {
+   font-weight: 700;
+   color: var(--color-accent);
+   content: counter(features, decimal-leading-zero) / '';
+  }
+ }
+}

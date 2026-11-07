@@ -19,10 +19,10 @@
  --font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
  --font-mono: ui-monospace, 'SF Mono', menlo, monospace;
  --text-3xl: #{fluid(36, 48, $bm, $desktop)};
- --text-2xl: #{fluid(28, 36, $bm, $desktop)};
+ --text-2xl: #{fluid(30, 36, $bm, $desktop)};
  --text-xl: #{fluid(24, 30, $bm, $desktop)};
  --text-lg: #{fluid(20, 24, $bm, $desktop)};
- --text-md: #{rem(20)};
+ --text-md: #{fluid(18, 20, $bm, $desktop)};
  --text-base: #{rem(16)};
  --text-sm: #{rem(14)};
  --padding-inline: #{fluid(16, 32, $bm, $desktop)};
