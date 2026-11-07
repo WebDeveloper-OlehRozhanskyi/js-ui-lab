@@ -79,51 +79,27 @@
        aria-labelledby="tab-accordion"
        data-tabs-panel
        tabindex="0">
-       <h3 class="tabs__title title">Accordion</h3>
-       <div class="tabs" data-tabs>
-        <div class="tabs__list" role="tablist" aria-label="Accordion code">
-         <button
-          class="tabs__list-button button"
-          role="tab"
-          id="tab-html"
-          type="button"
-          aria-controls="panel-html"
-          aria-selected="true"
-          data-tabs-button
-          tabindex="0">
-          HTML
-         </button>
-         <button
-          class="tabs__list-button button"
-          role="tab"
-          id="tab-css"
-          type="button"
-          aria-controls="panel-css"
-          aria-selected="false"
-          data-tabs-button
-          tabindex="-1">
-          CSS
-         </button>
-        </div>
-        <div
-         class="tabs__panel"
-         role="tabpanel"
-         id="panel-html"
-         aria-labelledby="tab-html"
-         data-tabs-panel
-         tabindex="0">
-         <p class="tabs__text">html</p>
-        </div>
-        <div
-         class="tabs__panel"
-         role="tabpanel"
-         id="panel-css"
-         aria-labelledby="tab-css"
-         data-tabs-panel
-         tabindex="0"
-         hidden>
-         <p class="tabs__text">css</p>
-        </div>
+       <div class="demo">
+        <h3 class="demo__title title">Accordion</h3>
+        <p class="demo__description">
+         A list of headings that show or hide their content. Useful for FAQs and
+         long pages where not everything needs to be visible at once.
+        </p>
+        <h4 class="demo__subtitle title">Demo</h4>
+        <div class="demo__preview">The demo is coming soon.</div>
+        <h4 class="demo__subtitle title">What it does</h4>
+        <ul class="demo__features">
+         <li class="demo__features-item">Opens and closes sections on click</li>
+         <li class="demo__features-item">
+          Works from the keyboard: Tab, Enter and Space
+         </li>
+         <li class="demo__features-item">
+          Tells screen readers whether a section is open or closed
+         </li>
+         <li class="demo__features-item">
+          Several accordions on one page work independently
+         </li>
+        </ul>
        </div>
       </div>
       <div
@@ -134,7 +110,30 @@
        data-tabs-panel
        tabindex="0"
        hidden>
-       <h3 class="tabs__title title">modal</h3>
+       <div class="demo">
+        <h3 class="demo__title title">Modal</h3>
+        <p class="demo__description">
+         A dialog that opens on top of the page and asks for the user's
+         attention. Useful for confirmations, short forms and details.
+        </p>
+        <h4 class="demo__subtitle title">Demo</h4>
+        <div class="demo__preview">The demo is coming soon.</div>
+        <h4 class="demo__subtitle title">What it does</h4>
+        <ul class="demo__features">
+         <li class="demo__features-item">
+          Opens from a button and returns focus to it when closed
+         </li>
+         <li class="demo__features-item">
+          Closes with Escape, the close button or a click outside
+         </li>
+         <li class="demo__features-item">
+          Keeps keyboard focus inside while open
+         </li>
+         <li class="demo__features-item">
+          Hides the page behind it from screen readers
+         </li>
+        </ul>
+       </div>
       </div>
      </div>
     </div>
