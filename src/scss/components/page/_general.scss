@@ -41,4 +41,8 @@
   color: var(--color-white);
   background-color: var(--color-accent);
  }
+
+ &:active {
+  transform: scale(var(--scale-active));
+ }
 }
