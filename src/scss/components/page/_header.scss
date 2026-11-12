@@ -40,6 +40,7 @@
   color: inherit;
   white-space: nowrap;
   text-decoration: none;
+  border-radius: var(--radius-full);
   transition: color var(--transition);
 
   @include hover {
