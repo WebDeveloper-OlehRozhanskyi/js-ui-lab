@@ -1,0 +1,71 @@
+@use 'page_settings/foundation' as *;
+
+.accordion {
+ --accordion-icon-size: #{rem(8)};
+
+ display: grid;
+ gap: var(--gap-sm);
+
+ // .accordion__item
+ &__item {
+  background-color: var(--glass-bg-strong);
+  border: 1px solid var(--color-300);
+  border-radius: var(--radius-md);
+ }
+
+ // .accordion__heading
+ &__heading {
+  font-size: var(--text-base);
+  border-radius: inherit;
+ }
+
+ // .accordion__button
+ &__button {
+  display: flex;
+  gap: var(--gap-md);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--tap-size);
+  padding: var(--gap-sm) var(--gap-md);
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: inherit;
+  transition: color var(--transition);
+
+  // Стрілка з двох бордерів — декоративна, скрінрідер її не читає
+  &::after {
+   flex-shrink: 0;
+   width: var(--accordion-icon-size);
+   height: var(--accordion-icon-size);
+   content: '';
+   border-right: 2px solid currentcolor;
+   border-bottom: 2px solid currentcolor;
+   transform: translateY(-25%) rotate(45deg);
+   transition: transform var(--transition);
+  }
+
+  &[aria-expanded='true']::after {
+   transform: translateY(25%) rotate(-135deg);
+  }
+
+  @include hover {
+   color: var(--color-accent);
+  }
+ }
+
+ // .accordion__panel
+ &__panel {
+  padding: 0 var(--gap-md) var(--gap-md);
+ }
+
+ // .accordion__text
+ &__text {
+  margin-block: 0;
+  color: var(--color-600);
+ }
+}

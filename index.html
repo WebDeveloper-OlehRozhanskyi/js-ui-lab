@@ -89,7 +89,64 @@
         </div>
         <div class="demo__group">
          <h4 class="demo__subtitle title">Demo</h4>
-         <div class="demo__preview">The demo is coming soon.</div>
+         <div class="demo__preview">
+          <div class="accordion">
+           <div class="accordion__item">
+            <h5 class="accordion__heading title">
+             <button
+              class="accordion__button"
+              data-accordion-button
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-panel-1">
+              What is JS UI Lab?
+             </button>
+            </h5>
+            <div class="accordion__panel" id="faq-panel-1" hidden>
+             <p class="accordion__text">
+              A collection of interactive UI components built with vanilla
+              JavaScript.
+             </p>
+            </div>
+           </div>
+           <div class="accordion__item">
+            <h5 class="accordion__heading title">
+             <button
+              class="accordion__button"
+              data-accordion-button
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-panel-2">
+              Do I need a framework?
+             </button>
+            </h5>
+            <div class="accordion__panel" id="faq-panel-2" hidden>
+             <p class="accordion__text">
+              No. Each component is a small JS module, a SCSS partial and a
+              piece of HTML.
+             </p>
+            </div>
+           </div>
+           <div class="accordion__item">
+            <h5 class="accordion__heading title">
+             <button
+              class="accordion__button"
+              data-accordion-button
+              type="button"
+              aria-expanded="false"
+              aria-controls="faq-panel-3">
+              Are the components accessible?
+             </button>
+            </h5>
+            <div class="accordion__panel" id="faq-panel-3" hidden>
+             <p class="accordion__text">
+              Yes. They work with a keyboard and tell screen readers what state
+              they are in.
+             </p>
+            </div>
+           </div>
+          </div>
+         </div>
         </div>
         <div class="demo__group">
          <h4 class="demo__subtitle title">What it does</h4>
@@ -119,28 +176,34 @@
        tabindex="0"
        hidden>
        <div class="demo">
-        <h3 class="demo__title title">Modal</h3>
-        <p class="demo__description">
-         A dialog that opens on top of the page and asks for the user's
-         attention. Useful for confirmations, short forms and details.
-        </p>
-        <h4 class="demo__subtitle title">Demo</h4>
-        <div class="demo__preview">The demo is coming soon.</div>
-        <h4 class="demo__subtitle title">What it does</h4>
-        <ul class="demo__features" role="list">
-         <li class="demo__features-item">
-          Opens from a button and returns focus to it when closed
-         </li>
-         <li class="demo__features-item">
-          Closes with Escape, the close button or a click outside
-         </li>
-         <li class="demo__features-item">
-          Keeps keyboard focus inside while open
-         </li>
-         <li class="demo__features-item">
-          Hides the page behind it from screen readers
-         </li>
-        </ul>
+        <div class="demo__group">
+         <h3 class="demo__title title">Modal</h3>
+         <p class="demo__description">
+          A dialog that opens on top of the page and asks for the user's
+          attention. Useful for confirmations, short forms and details.
+         </p>
+        </div>
+        <div class="demo__group">
+         <h4 class="demo__subtitle title">Demo</h4>
+         <div class="demo__preview">The demo is coming soon.</div>
+        </div>
+        <div class="demo__group">
+         <h4 class="demo__subtitle title">What it does</h4>
+         <ul class="demo__features" role="list">
+          <li class="demo__features-item">
+           Opens from a button and returns focus to it when closed
+          </li>
+          <li class="demo__features-item">
+           Closes with Escape, the close button or a click outside
+          </li>
+          <li class="demo__features-item">
+           Keeps keyboard focus inside while open
+          </li>
+          <li class="demo__features-item">
+           Hides the page behind it from screen readers
+          </li>
+         </ul>
+        </div>
        </div>
       </div>
      </div>
