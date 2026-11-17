@@ -2,6 +2,7 @@
 
 .accordion {
  --accordion-icon-size: #{rem(8)};
+ --accordion-fade: calc(var(--transition) / 2);
 
  display: grid;
  gap: var(--gap-sm);
@@ -56,11 +57,47 @@
   @include hover {
    color: var(--color-accent);
   }
+
+  &:focus-visible {
+   outline-offset: calc(var(--focus-width) * -1);
+  }
  }
 
  // .accordion__panel
  &__panel {
-  padding: 0 var(--gap-md) var(--gap-md);
+  display: grid;
+  grid-template-rows: 1fr;
+  padding-bottom: var(--gap-md);
+  opacity: 1;
+  transition:
+   grid-template-rows var(--transition),
+   display var(--transition) allow-discrete,
+   padding-bottom var(--transition),
+   opacity var(--transition) var(--accordion-fade);
+
+  @starting-style {
+   grid-template-rows: 0fr;
+   padding-bottom: 0;
+   opacity: 0;
+  }
+
+  &[hidden] {
+   display: none;
+   grid-template-rows: 0fr;
+   padding-bottom: 0;
+   opacity: 0;
+   transition:
+    opacity var(--accordion-fade),
+    grid-template-rows var(--transition),
+    padding-bottom var(--transition),
+    display var(--transition) allow-discrete;
+  }
+ }
+
+ // .accordion__content
+ &__content {
+  padding-inline: var(--gap-md);
+  overflow: hidden;
  }
 
  // .accordion__text
